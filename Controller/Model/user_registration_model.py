@@ -1,28 +1,27 @@
 import tkinter as tk
 import sqlite3
 import os
+import pathlib as pl
 
 class db:
     
     _connection = None
-    _file_dir = ""
     _cur = None
 
     def __init__(self, dir):
-        self._file_dir = os.path.dirname(__file__) + dir
+        self._file_dir = str(pl.Path(os.path.dirname(__file__)).parents[1]) + dir
         self._connection = sqlite3.connect(self._file_dir)
         self._cur = self._connection.cursor()
-        
+
     def check(self):
         if(self._cur!=None):
             print("Connection Successful!")
         else:
             print("Connection Unsuccessful.")
     
-    def insertUser(self, Username:str, Password: str, LastName: str, FirstName: str, Email: str, Phone: int):
-        sql_command = """INSERT INTO Users(Username, Password, Last_Name, First_Name, Email, Phone) VALUES (?, ?, ?, ?, ?, ?)"""
-        sql_data = (Username, Password, LastName, FirstName, Email, Phone)
-        self._cur.execute(sql_command, sql_data)
+    def insertUser(self, var):
+        sql_command = """INSERT INTO Users(Username, Password, Last_Name, Middle_Name, First_Name, Sex, Email, Phone) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"""
+        self._cur.execute(sql_command, var)
         self._connection.commit()
         print("User has been successfully added into the Database.")
     
@@ -64,7 +63,7 @@ class db:
         
 def main():
     
-    database = db("\Database\PPDatabase.db")
+    database = db("\PPDatabase.db")
     database.check()
     database.printTable("Users")
     database.insertUser('ildpa', '12345', 'Palaruan', 'Ildreen,', 'Ildpa@gmail.com', 123456789)
