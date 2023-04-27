@@ -75,8 +75,10 @@ class userRegisterView():
   
     def register(self):
         if(self.Password_entry.get()==self.RPassword_entry.get()):
-            User_info = (self.lastName_entry.get(), self.middleName_entry.get(), self.firstName_entry.get(), self.Sex_entry.get(), self.Email_entry.get(), int(self.Phone_entry.get())
-                         , self.Username_entry.get(), self.Password_entry.get())
+            User_info = (self.Username_entry.get(), self.Password_entry.get(),
+                         self.lastName_entry.get(), self.middleName_entry.get(), 
+                         self.firstName_entry.get(), self.Sex_entry.get(), 
+                         self.Email_entry.get(), int(self.Phone_entry.get()))
         
             self.control.addUser(User_info)
             
