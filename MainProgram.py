@@ -1,7 +1,4 @@
-from Core import database
-import GUI
-
-def main():
-    
-
-main()
+#THIS FILE IS THE MAIN PROGRAM OF PROGRESSPAL
+import Controller.welcome_controller as welcomeScreen
+mainProgram = welcomeScreen.welcomeController()
+mainProgram.run_prog()

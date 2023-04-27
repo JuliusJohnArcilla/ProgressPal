@@ -25,8 +25,7 @@ class welcomeView():
         self.root.mainloop()
         
     def login_action(self):
-        self.root.withdraw()
-        self.control.show()
+        self.control.gotologin()
         
     def register_action(self):
         self.control.gotoreg()
