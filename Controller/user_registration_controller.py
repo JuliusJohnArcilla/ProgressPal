@@ -1,5 +1,3 @@
-import Controller.View.user_register_view as view
-import Controller.Model.user_registration_model as model
 import tkinter as tk
 
 class userRegistrationController:
@@ -7,18 +5,21 @@ class userRegistrationController:
         self.root = root
         self.control = control
     
-    def demo(self):
-        self.view = view.userRegisterView(self.root, self)
-        self.model = model.registerModel("\PPDatabase.db")
-        
-        
+    def RegProg(self):
         self.view.show()
     
+    def switchViewLogin(self):
+        self.control.Login()
+    
     def addUser(self, userInfo):
-        self.model.insertUser(userInfo)
+        self.model.add_user(userInfo)
     
     def previous(self):
         self.control.root.deiconify()
+    
+    def assignValues(self):
+        self.view = self.control.View
+        self.model = self.control.Model
 
 if __name__ == '__main__':
     sample = tk.Tk()
