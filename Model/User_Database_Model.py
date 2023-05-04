@@ -5,6 +5,7 @@ import os
 class userManagerModel:
     
     _cur = None
+    loginUser = ""
     
     #TABLES
     Table = "Users"
@@ -19,22 +20,40 @@ class userManagerModel:
             print("Connection Successful!")
         else:
             print("Connection Unsuccessful.")
-            
-    def searchID(self, Username):
-        sql_command = """SELECT UserID FROM """ + self.Table + """ WHERE Username = ?"""
-        sql_data = (Username,)
-        self._cur.execute(sql_command, sql_data)
-        return self._cur.fetchone()[0] #Return UserID
+    
+    def searchEmail(self, Username=None, Email=None):
+        if(Email != None):
+            sql_command = """SELECT Email FROM """ + self.Table + """ WHERE Email = ?"""
+            sql_data = (Email,)
+            self._cur.execute(sql_command, sql_data)
+            return self._cur.fetchone()[0] # Return Email
+        elif(Username != None):
+            sql_command = """SELECT Email FROM """ + self.Table + """ WHERE Username = ?"""
+            sql_data = (Username,)
+            self._cur.execute(sql_command, sql_data)
+            return self._cur.fetchone()[0] # Return Username
+        else:
+            print("Invalid.")
     
     def getUser(self, Username):
-        sql_command = """SELECT Username FROM """ + self.Table + """ WHERE UserID = ?"""
-        sql_data = (self.searchID(Username),)
+        sql_command = """SELECT Username FROM """ + self.Table + """ WHERE Username = ?"""
+        sql_data = (Username,)
         self._cur.execute(sql_command, sql_data)
         return self._cur.fetchone()[0] #Return Username
     
+    def getName(self, Username):
+        sql_command = """SELECT First_Name FROM """ + self.Table + """ WHERE Username = ?"""
+        sql_data = (self.getUser(Username),)
+        self._cur.execute(sql_command, sql_data)
+        First_Name = self._cur.fetchone()[0]
+        sql_command = """SELECT Last_Name FROM  """ + self.Table + """ WHERE Username = ?"""
+        self._cur.execute(sql_command, sql_data)
+        Last_Name = self._cur.fetchone()[0]
+        return First_Name + " " + Last_Name
+    
     def getPassword(self, Username):
-        sql_command = """SELECT Password FROM """ + self.Table + """ WHERE UserID = ?"""
-        sql_data = (self.searchID(Username),)
+        sql_command = """SELECT Password FROM """ + self.Table + """ WHERE Username = ?"""
+        sql_data = (Username,)
         self._cur.execute(sql_command, sql_data)
         return self._cur.fetchone()[0] #Return Password 
     
@@ -67,6 +86,8 @@ class userManagerModel:
                 print("Wrong Password.")   
         
         if(flag_username == True and flag_password == True):
+            self.loginUser = User
+            print(self.loginUser)
             return True
         
     def add_user(self, var):
@@ -81,15 +102,19 @@ class userManagerModel:
         self._cur.execute(sql_command, sql_data)
         self._connection.commit()
         print("User has been successfully deleted.")
+    
         
 if __name__ == '__main__':
-    db = userManagerModel('\PPDatabase.db')
+    db = userManagerModel()
     db.check()
     if(db.run_comparison('a', 'b')):
         print("Login Succesful!")
     else:
         print("Login Unsuccessful.")
-    
+        
+    db.getUser('a')
+    db.getPassword('a')
+    print(db.searchEmail(Email="joulesdearc@gmail.com"))
         
     
     

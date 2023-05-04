@@ -14,9 +14,6 @@ class userRegistrationController:
     def addUser(self, userInfo):
         self.model.add_user(userInfo)
     
-    def previous(self):
-        self.control.root.deiconify()
-    
     def assignValues(self):
         self.view = self.control.View
         self.model = self.control.Model

@@ -1,6 +1,7 @@
 import tkinter as tk
 
 class userLoginController:
+    
     def __init__(self, root, control)->None:
         self.root = root
         self.control = control
@@ -17,6 +18,9 @@ class userLoginController:
     
     def switchViewMain(self):
         self.control.MainMenu()
+        
+    def switchViewForgetPassword(self):
+        self.control.ForgetPassword()
         
         
         

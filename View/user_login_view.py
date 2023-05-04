@@ -10,7 +10,7 @@ class userLoginView():
         self.control = control
         
     def show(self):
-        self.root.title("ProgressPal: Welcome to ProgressPal!")
+        self.root.title("Welcome to ProgressPal!")
                 
         color_background='#2D3033'
         color_rectangle='#868C96'
@@ -116,7 +116,7 @@ class userLoginView():
         self.Password_entry.bind('<Button-1>', lambda x: self.on_focus_in_pass(self.Password_entry, "Password"))
         self.Password_entry.bind('<FocusOut>', lambda x: self.on_focus_out_pass(self.Password_entry, "Password"))
         self.SignUp_Button.bind('<Button-1>', lambda x: self.switchViewSignUp())
-        self.ForgotPassword_Button.bind('<Button-1>', lambda x: self.ForgotPassword_Button())
+        self.ForgotPassword_Button.bind('<Button-1>', lambda x: self.switchForgetPassword())
                         
         self.root.mainloop()
     
@@ -125,8 +125,6 @@ class userLoginView():
         self.control.previous()
         pass
 
-    def implement():
-        pass
     
     def on_focus_in(self, entry, placeholder):
         if entry.cget('state') != 'normal':
@@ -175,14 +173,20 @@ class userLoginView():
     def switchViewSignUp(self):
         self.viewFrame.destroy() 
         self.control.switchViewSignUp()
-        
+    
+    def switchForgetPassword(self):
+        self.viewFrame.destroy()
+        self.control.switchViewForgetPassword()
+    
     def checkDatabase(self):
         username = self.Username_Entry.get()
         password = self.Password_entry.get()
         
         if(len(self.control.model.getUser(username))>0):
             if(password == self.control.model.getPassword(self.control.model.getUser(username))):
-                self.switchViewMainMenu()
+                if(self.control.model.run_comparison(username, password)):
+                    self.switchViewMainMenu()
+                
         
     
         

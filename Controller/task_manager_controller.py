@@ -1,6 +1,6 @@
-class mainMenuController:
+class TaskManagerController:
     def __init__(self, root, control)->None:
-        super(mainMenuController, self).__init__()
+        super(TaskManagerController, self).__init__()
         self.root = root
         self.control = control
     
@@ -8,18 +8,16 @@ class mainMenuController:
         self.view = self.control.View
         self.model = self.control.Model
     
-    def MainMenuProg(self):
+    def TaskProg(self):
         self.view.show()
-    
-    def switchViewTasks(self):
-        self.control.TaskManager()
+        
+    def switchViewMainMenu(self):
+        self.control.MainMenu()
     
     def switchViewProfile(self):
         self.control.Profile()
     
     def switchViewSchedule(self):
         self.control.Schedule()
-    
-    
         
-        
+    

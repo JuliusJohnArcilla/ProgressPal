@@ -244,6 +244,7 @@ class userRegisterView():
             self.back()
         else:
             pass
+        
     def Validate(self, email, password, rpassword):
         regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\b'
         if(re.fullmatch(regex, email)):

@@ -1,25 +1,24 @@
-class mainMenuController:
+class UserProfileController:
     def __init__(self, root, control)->None:
-        super(mainMenuController, self).__init__()
+        super(UserProfileController, self).__init__()
         self.root = root
         self.control = control
-    
+        self.User = None
+        
     def assignValues(self):
         self.view = self.control.View
         self.model = self.control.Model
-    
-    def MainMenuProg(self):
+        
+    def ProfileProg(self):
         self.view.show()
-    
-    def switchViewTasks(self):
-        self.control.TaskManager()
-    
-    def switchViewProfile(self):
-        self.control.Profile()
+        
+    def switchViewHome(self):
+        self.control.MainMenu()
     
     def switchViewSchedule(self):
         self.control.Schedule()
     
+    def switchViewTasks(self):
+        self.control.TaskManager()
+        
     
-        
-        
